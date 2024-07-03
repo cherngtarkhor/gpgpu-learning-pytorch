@@ -8,6 +8,10 @@ using namespace sycl;
 using namespace xpu::dpcpp;
 
 int main(int argc, const char* argv[]) {
+  std::cout << "arg count:" << argc << std::endl;
+  std::cout << "arg 1:" << argv[0] << std::endl;
+  std::cout << "arg 2:" << argv[1] << std::endl;
+
   torch::jit::script::Module module;
   try {
     module = torch::jit::load(argv[1]);
@@ -20,6 +24,7 @@ int main(int argc, const char* argv[]) {
   module.to(at::kXPU);
 
   std::vector<torch::jit::IValue> inputs;
+
   // fetch sycl queue from c10::Stream on XPU device.
   auto device_type = c10::DeviceType::XPU;
   c10::impl::VirtualGuardImpl impl(device_type);
