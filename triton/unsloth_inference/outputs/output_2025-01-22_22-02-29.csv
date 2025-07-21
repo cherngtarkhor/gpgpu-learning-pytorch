@@ -1,0 +1,7 @@
+Timestamp,model_name:,Input Tokens Count,Output Tokens Count,Generated Tokens Count,Loading Time (s),Inference Time (s),1st Token Latency (ms),Throughput (token/s),1st Valid Token Latency (ms),Throughput 2+ (token/s),Remark
+2025-01-22 21:54:35,meta-llama/Llama-3.2-1B-Instruct,25,153,128,9.040761,16.114279,1859.117746,7.943266,,,
+2025-01-22 21:56:11,meta-llama/Llama-3.2-3B-Instruct,25,153,128,10.326055,38.627567,1975.426674,3.313696,,,
+2025-01-22 21:58:18,microsoft/Phi-3-mini-4k-instruct,96,224,128,8.989696,55.809328,2278.9855,2.293523,,,
+2025-01-22 21:58:47,google/gemma-2b-it,85,122,37,10.627404,5.231767,1992.959738,7.07218,,,
+2025-01-22 22:00:44,HuggingFaceH4/zephyr-7b-beta,96,224,128,13.680428,47.800206,2198.038101,2.677813,,,
+2025-01-22 22:02:27,mistralai/Mistral-7B-Instruct-v0.2,96,207,111,12.129946,41.68741,2216.301918,2.662674,,,

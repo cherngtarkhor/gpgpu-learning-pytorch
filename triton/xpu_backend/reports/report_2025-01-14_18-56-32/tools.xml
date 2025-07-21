@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="8" time="76.567" timestamp="2025-01-14T19:32:17.833456+08:00" hostname="flexgpua770-X299-AORUS-Gaming-3-Pro"><testcase classname="test.unit.tools.test_aot" name="test_compile_link_matmul_no_specialization" time="4.784"><failure message="TypeError: can only concatenate str (not &quot;NoneType&quot;) to str">def test_compile_link_matmul_no_specialization():
+        np.random.seed(3)
+    
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dtype = "fp16"
+    
+            BM, BN, BK = 16, 16, 16
+    
+            kernel_path = write_triton_kernels(tmp_dir, kernel_src, kernel_utils_src)
+            compile_aot_kernel_no_specialization(tmp_dir, kernel_path, dtype, BM, BN, BK)
+            link_aot_kernels(tmp_dir)
+    
+            # compile test case
+            M, N, K = 16, 16, 16
+&gt;           gen_kernel_library(tmp_dir, "libkernel.so")
+
+tools/test_aot.py:418: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/test_aot.py:119: in gen_kernel_library
+    gen_kernel_library_xpu(dir, libname)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+dir = '/tmp/tmpbm96b61u', libname = 'libkernel.so'
+
+    def gen_kernel_library_xpu(dir, libname):
+        cpp_files = glob.glob(os.path.join(dir, "*.cpp"))
+        subprocess.run(
+            ["g++"] + cpp_files + ["-I" + include_dir for include_dir in COMPILATION_HELPER.include_dir] +
+&gt;           ["-L" + COMPILATION_HELPER.libsycl_dir, "-c", "-lsycl", "-fPIC"],
+            check=True,
+            cwd=dir,
+        )
+E       TypeError: can only concatenate str (not "NoneType") to str
+
+tools/test_aot.py:106: TypeError</failure></testcase><testcase classname="test.unit.tools.test_aot" name="test_compile_link_matmul" time="13.823"><failure message="TypeError: can only concatenate str (not &quot;NoneType&quot;) to str">def test_compile_link_matmul():
+        np.random.seed(3)
+    
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dtype = "fp16"
+            BM, BN, BK = 16, 16, 16
+    
+            kernel_path = write_triton_kernels(tmp_dir, kernel_src, kernel_utils_src)
+            compile_aot_kernels(tmp_dir, kernel_path, dtype, BM, BN, BK, ha_hb_hints=["", ":16"])
+            link_aot_kernels(tmp_dir)
+    
+            # compile test case
+            M, N, K = 16, 16, 16
+&gt;           gen_kernel_library(tmp_dir, "libkernel.so")
+
+tools/test_aot.py:448: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/test_aot.py:119: in gen_kernel_library
+    gen_kernel_library_xpu(dir, libname)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+dir = '/tmp/tmpjzc9a79n', libname = 'libkernel.so'
+
+    def gen_kernel_library_xpu(dir, libname):
+        cpp_files = glob.glob(os.path.join(dir, "*.cpp"))
+        subprocess.run(
+            ["g++"] + cpp_files + ["-I" + include_dir for include_dir in COMPILATION_HELPER.include_dir] +
+&gt;           ["-L" + COMPILATION_HELPER.libsycl_dir, "-c", "-lsycl", "-fPIC"],
+            check=True,
+            cwd=dir,
+        )
+E       TypeError: can only concatenate str (not "NoneType") to str
+
+tools/test_aot.py:106: TypeError</failure></testcase><testcase classname="test.unit.tools.test_aot" name="test_launcher_has_no_available_kernel" time="4.790"><failure message="TypeError: can only concatenate str (not &quot;NoneType&quot;) to str">def test_launcher_has_no_available_kernel():
+        np.random.seed(3)
+    
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dtype = "fp16"
+            BM, BN, BK = 16, 16, 16
+    
+            kernel_path = write_triton_kernels(tmp_dir, kernel_src, kernel_utils_src)
+            compile_aot_kernels(tmp_dir, kernel_path, dtype, BM, BN, BK, ha_hb_hints=[":1"])
+            link_aot_kernels(tmp_dir)
+    
+            # compile test case
+            M, N, K = 16, 16, 16
+&gt;           gen_kernel_library(tmp_dir, "libkernel.so")
+
+tools/test_aot.py:479: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/test_aot.py:119: in gen_kernel_library
+    gen_kernel_library_xpu(dir, libname)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+dir = '/tmp/tmpgt3e_dgq', libname = 'libkernel.so'
+
+    def gen_kernel_library_xpu(dir, libname):
+        cpp_files = glob.glob(os.path.join(dir, "*.cpp"))
+        subprocess.run(
+            ["g++"] + cpp_files + ["-I" + include_dir for include_dir in COMPILATION_HELPER.include_dir] +
+&gt;           ["-L" + COMPILATION_HELPER.libsycl_dir, "-c", "-lsycl", "-fPIC"],
+            check=True,
+            cwd=dir,
+        )
+E       TypeError: can only concatenate str (not "NoneType") to str
+
+tools/test_aot.py:106: TypeError</failure></testcase><testcase classname="test.unit.tools.test_aot" name="test_compile_link_autotune_matmul" time="50.292"><failure message="TypeError: can only concatenate str (not &quot;NoneType&quot;) to str">def test_compile_link_autotune_matmul():
+        np.random.seed(3)
+    
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dtype = "fp16"
+    
+            kernel_path = write_triton_kernels(tmp_dir, kernel_src, kernel_utils_src)
+    
+            tile_sizes = [
+                [16, 16, 16],
+                [32, 32, 16],
+                [32, 32, 32],
+                [64, 64, 32],
+            ]
+    
+            for ts in tile_sizes:
+                BM, BN, BK = ts[0], ts[1], ts[2]
+                compile_aot_kernels(tmp_dir, kernel_path, dtype, BM, BN, BK, ha_hb_hints=["", ":16"])
+    
+            link_aot_kernels(tmp_dir)
+    
+&gt;           gen_kernel_library(tmp_dir, "libkernel.so")
+
+tools/test_aot.py:522: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/test_aot.py:119: in gen_kernel_library
+    gen_kernel_library_xpu(dir, libname)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+dir = '/tmp/tmpucce5znm', libname = 'libkernel.so'
+
+    def gen_kernel_library_xpu(dir, libname):
+        cpp_files = glob.glob(os.path.join(dir, "*.cpp"))
+        subprocess.run(
+            ["g++"] + cpp_files + ["-I" + include_dir for include_dir in COMPILATION_HELPER.include_dir] +
+&gt;           ["-L" + COMPILATION_HELPER.libsycl_dir, "-c", "-lsycl", "-fPIC"],
+            check=True,
+            cwd=dir,
+        )
+E       TypeError: can only concatenate str (not "NoneType") to str
+
+tools/test_aot.py:106: TypeError</failure></testcase><testcase classname="test.unit.tools.test_aot" name="test_ttgir_to_ptx" time="1.279" /><testcase classname="test.unit.tools.test_aot" name="test_ttgir_to_spv" time="0.012" /><testcase classname="test.unit.tools.test_disasm" name="test_disam_spvbin" time="0.095" /><testcase classname="test.unit.tools.test_irsource" name="test_mlir_attribute_parsing" time="0.010" /></testsuite></testsuites>

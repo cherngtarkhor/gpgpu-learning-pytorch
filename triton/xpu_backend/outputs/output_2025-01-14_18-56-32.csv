@@ -1,0 +1,24 @@
+Test Type,Tests Passed,Tests Failed,Skipped,xfailed,Total Test,Warnings,Total Time (s)
+2025-01-14_18-56-32
+CommitID:715359c
+Environment:.prebuild
+(--ignore-errors --unit --core --tutorial --reports --skip-list /home/tanjingder/4d8e9bb/intel-xpu-backend-for-triton/scripts/skiplist/a770)
+CXX,196,0,0,0,196,0,5.19
+LIT,146,0,0,0,146,0,6.75
+CORE(Language),9624,157,8,1290,11079,151,2048.58
+CORE(Subprocess),Run Fail
+CORE(Runtime),43,0,0,1,44,4,61.37
+CORE(Debug),28,0,0,0,28,36,9.34
+CORE(Line_Info),6,0,0,0,6,0,2.68
+CORE(Tools),4,4,0,0,8,0,in
+Regression,105,0,0,160,265,24,4.73
+Tutorial 01,PASS
+Tutorial 02,SKIP
+Tutorial 03,PASS
+Tutorial 04,PASS
+Tutorial 05,PASS
+Tutorial 06,SKIP
+Tutorial 07,PASS
+Tutorial 08,SKIP
+Tutorial 10,SKIP
+Tutorial 10i,SKIP
